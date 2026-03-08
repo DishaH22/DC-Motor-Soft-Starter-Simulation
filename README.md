@@ -56,7 +56,55 @@ As the motor speed increases:
 This prevents excessive current while allowing the motor to accelerate smoothly.
 
 ---
+## Circuit Design 
 
+The DC motor starting system consists of:
+
+1. DC voltage source (240 V)
+2. Separately excited DC motor
+3. Armature resistance
+4. External starting resistors
+5. Switching mechanism to remove resistors
+6. Measurement blocks for current, torque and speed
+
+The resistors are connected in series with the armature during startup.  
+As the motor accelerates and back EMF increases, the resistors are removed sequentially to maintain safe current levels.
+The model for starting the DC motor with external resistors is designed and implemented. The figure1 below shows the circuit and the figure 2 shows the 4 stages of resistors connected in series to the armature.
+
+<img width="424" height="496" alt="Screenshot 2026-03-08 193803" src="https://github.com/user-attachments/assets/a3b74447-d3e8-4dc0-882c-3548230c1990" />
+
+---
+
+## Simulation Workflow
+
+The simulation follows these steps:
+
+1. Motor starts at zero speed (Back EMF = 0)
+2. External resistors limit the starting current
+3. Motor speed increases gradually
+4. Resistors are removed at predefined time intervals
+5. Current, torque and speed waveforms are recorded
+
+---
+
+## Key Equations
+
+Armature current:
+
+Ia = (V − Eb) / Ra
+
+Where:
+
+V = Supply voltage  
+Eb = Back EMF  
+Ra = Armature resistance  
+
+Back EMF is proportional to motor speed:
+
+Eb = k × ω
+
+---
+   
 ## Simulation Cases
 
 ### Case 1 — 3 Stage Starting Resistors
@@ -110,6 +158,12 @@ The simulation produces the following waveforms:
 • Terminal Voltage  
 
 These waveforms demonstrate the improvement in current control when using staged resistors.
+
+<img width="592" height="709" alt="Screenshot 2026-03-08 185412" src="https://github.com/user-attachments/assets/3bf25983-af67-4ee2-b000-b2f623ac802b" />
+
+<img width="456" height="669" alt="Screenshot 2026-03-08 185452" src="https://github.com/user-attachments/assets/22c0ff73-19a6-4328-a613-288bdc51d815" />
+
+<img width="466" height="660" alt="Screenshot 2026-03-08 185506" src="https://github.com/user-attachments/assets/9bd24681-8682-43b6-9537-dfc2ff0c3ccf" />
 
 ---
 
